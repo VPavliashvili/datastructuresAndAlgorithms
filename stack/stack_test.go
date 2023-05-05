@@ -27,4 +27,11 @@ func TestStack(t *testing.T) {
     sut.Push(69)
     assert.Equal(t, *sut.Peek(), 69)
     assert.Equal(t, sut.Length(), 1)
+
+    sut.Pop()
+    sut.Pop()
+    sut.Pop()
+
+    assert.Nil(t, sut.Peek())
+    assert.Equal(t, sut.Length(), 0)
 }

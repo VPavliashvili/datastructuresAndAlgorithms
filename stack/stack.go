@@ -5,28 +5,28 @@ type node[t any] struct {
 	prev  *node[t]
 }
 
+func newnode[t any](v t, previous *node[t]) *node[t] {
+	return &node[t]{
+		value: v,
+		prev:  previous,
+	}
+}
+
 type Stack[t any] struct {
 	head   *node[t]
 	length int
 }
 
 func (s *Stack[t]) Push(elem t) {
-	if s.head == nil {
-		s.head = &node[t]{
-			value: elem,
-		}
+	s.length++
 
-		s.length++
+	if s.head == nil {
+		s.head = newnode(elem, nil)
 		return
 	}
 
-	n := &node[t]{
-		value: elem,
-		prev:  s.head,
-	}
-
+	n := newnode(elem, s.head)
 	s.head = n
-	s.length++
 }
 
 func (s *Stack[t]) Pop() *t {
@@ -39,18 +39,18 @@ func (s *Stack[t]) Pop() *t {
 
 	val := popped.value
 
-    s.length--
+	s.length--
 
 	return &val
 }
 
 func (s Stack[t]) Peek() *t {
-    if s.head == nil {
-        return nil
-    }
-    return &s.head.value
+	if s.head == nil {
+		return nil
+	}
+	return &s.head.value
 }
 
 func (s Stack[t]) Length() int {
-    return s.length
+	return s.length
 }
