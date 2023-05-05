@@ -8,25 +8,25 @@ import (
 )
 
 func TestQueue(t *testing.T) {
-	q := queue.Queue[int]{}
+	sut := queue.Queue[int]{}
 
-	q.Enqueue(5)
-	q.Enqueue(7)
-	q.Enqueue(9)
+	sut.Enqueue(5)
+	sut.Enqueue(7)
+	sut.Enqueue(9)
 
-	assert.Equal(t, *q.Dequeue(), 5)
-	assert.Equal(t, q.Length, 2)
+	assert.Equal(t, *sut.Dequeue(), 5)
+	assert.Equal(t, sut.Length(), 2)
 
-	q.Enqueue(11)
+	sut.Enqueue(11)
 
-	assert.Equal(t, *q.Dequeue(), 7)
-	assert.Equal(t, *q.Dequeue(), 9)
-	assert.Equal(t, *q.Peek(), 11)
-	assert.Equal(t, *q.Dequeue(), 11)
-	assert.Equal(t, q.Dequeue(), (*int)(nil))
-	assert.Equal(t, q.Length, 0)
+	assert.Equal(t, *sut.Dequeue(), 7)
+	assert.Equal(t, *sut.Dequeue(), 9)
+	assert.Equal(t, *sut.Peek(), 11)
+	assert.Equal(t, *sut.Dequeue(), 11)
+	assert.Equal(t, sut.Dequeue(), (*int)(nil))
+	assert.Equal(t, sut.Length(), 0)
 
-	q.Enqueue(69)
-	assert.Equal(t, *q.Peek(), 69)
-	assert.Equal(t, q.Length, 1)
+	sut.Enqueue(69)
+	assert.Equal(t, *sut.Peek(), 69)
+	assert.Equal(t, sut.Length(), 1)
 }

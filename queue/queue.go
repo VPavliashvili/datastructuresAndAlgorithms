@@ -15,16 +15,16 @@ func newnode[t any](v t, n *node[t]) *node[t] {
 type Queue[t any] struct {
 	head   *node[t]
 	tail   *node[t]
-	Length int
+	length int
 }
 
 func (q *Queue[t]) Enqueue(elem t) {
-	if q.Length == 0 {
+	if q.length == 0 {
 		n := newnode(elem, nil)
 
 		q.head = n
 		q.tail = n
-		q.Length++
+		q.length++
 		return
 	}
 
@@ -32,7 +32,7 @@ func (q *Queue[t]) Enqueue(elem t) {
 
 	q.tail.next = n
 	q.tail = n
-	q.Length++
+	q.length++
 }
 
 func (q *Queue[t]) Dequeue() *t {
@@ -40,27 +40,31 @@ func (q *Queue[t]) Dequeue() *t {
 		return nil
 	}
 
-	if q.Length == 1 {
+	if q.length == 1 {
 		res := q.head
 		q.tail = nil
 		q.head = nil
 
-		q.Length--
+		q.length--
 		return &res.value
 	}
 
     h := q.head
 	q.head = q.head.next
-	q.Length--
+	q.length--
 
     h.next = nil
 	return &h.value
 }
 
 func (q Queue[t]) Peek() *t {
-	if q.Length == 0 {
+	if q.length == 0 {
 		return nil
 	}
 
 	return &q.head.value
+}
+
+func (q Queue[t]) Length() int {
+    return q.length
 }
