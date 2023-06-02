@@ -33,3 +33,12 @@ func TestPostOrder(t *testing.T) {
 
 	assert.Equal(t, want, got)
 }
+
+func TestBreadthFirst(t *testing.T) {
+	sut := treetraversals.CreateTree()
+
+	got := sut.TraverseBreadthFirst()
+	want := []int{7, 23, 3, 5, 4, 18, 21}
+
+	assert.Equal(t, want, got)
+}
